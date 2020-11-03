@@ -1,6 +1,7 @@
-import javax.servlet.RequestDispatcher;
+import somePackage.Cart;
+
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class FirstServlet extends javax.servlet.http.HttpServlet {
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -8,18 +9,27 @@ public class FirstServlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        Cart cart = (Cart) session.getAttribute("cart");
+
         String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-        PrintWriter pw = response.getWriter();
+        if (cart == null) {
+            cart = new Cart();
+            cart.setName(name);
+            cart.setQuantity(quantity);
+        }
 
-        pw.println("<html");
-        pw.println("<h1> Hello, " + name + " " + surname + " </h1>");
-        pw.println("</html");
+        session.setAttribute("cart", cart);
 
-//        response.sendRedirect("https://www.google.com/");
-//        response.sendRedirect("/testJsp.jsp");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/testJsp.jsp");
-        dispatcher.forward(request, response);
+        getServletContext().getRequestDispatcher("/showCart.jsp").forward(request, response);
+
+//        PrintWriter pw = response.getWriter();
+
+//        pw.println("<html");
+//        pw.println("<h1> Yout count is: " + + "</h1>");
+//        pw.println("</html");
     }
 }
