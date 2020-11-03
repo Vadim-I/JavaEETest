@@ -1,4 +1,4 @@
-package somePackage;
+package cartPackage;
 
 public class Cart {
 

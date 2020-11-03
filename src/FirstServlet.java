@@ -1,14 +1,17 @@
-import somePackage.Cart;
+import cartPackage.Cart;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class FirstServlet extends javax.servlet.http.HttpServlet {
-    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+public class FirstServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
     }
 
-    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         HttpSession session = request.getSession();
 
         Cart cart = (Cart) session.getAttribute("cart");
@@ -26,10 +29,5 @@ public class FirstServlet extends javax.servlet.http.HttpServlet {
 
         getServletContext().getRequestDispatcher("/showCart.jsp").forward(request, response);
 
-//        PrintWriter pw = response.getWriter();
-
-//        pw.println("<html");
-//        pw.println("<h1> Yout count is: " + + "</h1>");
-//        pw.println("</html");
     }
 }

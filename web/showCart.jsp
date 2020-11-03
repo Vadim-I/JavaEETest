@@ -4,7 +4,7 @@
     <title>Show cart</title>
 </head>
 <body>
-    <%@ page import="somePackage.Cart" %>
+    <%@ page import="cartPackage.Cart" %>
 
     <% Cart cart = (Cart) session.getAttribute("cart"); %>
 
